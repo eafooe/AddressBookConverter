@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
-
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -34,10 +33,6 @@ public class Main {
     private static final Path outputDir = Paths.get(currentDir.toString(), "output");
     private static final Path inputDir = Paths.get(currentDir.toString(), "input");
     private static final File baseSchema = Paths.get(currentDir.toString(), "schemas", "contact.xsd").toFile();
-
-
-
-
 
     public static void main(String[] args) throws IOException {
         Scanner scan = new Scanner(System.in);
