@@ -1,4 +1,11 @@
-
+/**
+ * Represents a contact in the address book.
+ * CustomerID must be unique.
+ * Region, postal code, and fax are optional.
+ * Uses a builder for construction.
+ * @author Emily Fooe
+ *
+ */
 public class Contact {
     private final String customerId;
     private final String companyName;
@@ -30,6 +37,7 @@ public class Contact {
         System.out.println();
     }
 
+    //region Getters
     public String getCustomerId() {
         return customerId;
     }
@@ -74,10 +82,10 @@ public class Contact {
         return phone;
     }
 
-
     public String getFax() {
         return fax;
     }
+    //endregion
 
     @Override
     public String toString(){

@@ -14,6 +14,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+
+/**
+ * A helper class allowing for the conversion between JSON and XML
+ * @author Emily Fooe
+ *
+ */
 public class ContactHelper {
     private static final String CONTACT = "Contact";
     private static final String CUSTOMER_ID = "CustomerID";
@@ -29,12 +35,12 @@ public class ContactHelper {
     private static final String PHONE = "Phone";
     private static final String FAX = "Fax";
 
-
-
+    // Saves JsonArray in .json file
     public static Contact[] jsonFileToContactArray(File file) throws FileNotFoundException {
         return new Gson().fromJson(new FileReader(file), Contact[].class);
     }
 
+    // Converts Contact[] to JsonArray
     public static JsonArray contactArrayToJsonArray(Contact[] contacts){
         Gson gson = new Gson();
         JsonArray contactArray = new JsonArray();
@@ -44,7 +50,7 @@ public class ContactHelper {
         return contactArray;
     }
 
-    // Converts contacts stored in an XML address book to an array of Contact objects
+    // Converts contacts stored in an XML address book to Contact[]
     public static Contact[] xmlFileToContactArray(File file) throws IOException, ParserConfigurationException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -65,6 +71,7 @@ public class ContactHelper {
     }
 
 
+    // Create elements for each XML node during document construction
     public static void contactToXmlNode(Document doc, Element root, Contact contact){
         Element contactNode = doc.createElement(CONTACT);
         root.appendChild(contactNode);
@@ -124,6 +131,7 @@ public class ContactHelper {
         }
     }
 
+    // Read in an XML node and convert to Contact
     public static Contact xmlNodeToContact(Element node){
         String customerId = node.getElementsByTagName(CUSTOMER_ID).item(0).getChildNodes().item(0).getNodeValue();
         String companyName = node.getElementsByTagName(COMPANY_NAME).item(0).getChildNodes().item(0).getNodeValue();
@@ -132,6 +140,7 @@ public class ContactHelper {
         String address = node.getElementsByTagName(ADDRESS).item(0).getChildNodes().item(0).getNodeValue();
         String city = node.getElementsByTagName(CITY).item(0).getChildNodes().item(0).getNodeValue();
         String email = node.getElementsByTagName(EMAIL).item(0).getChildNodes().item(0).getNodeValue();
+        // Region, postal code, and fax are optional fields
         String region = null;
         if (node.getElementsByTagName(REGION).item(0) != null){
             region = node.getElementsByTagName(REGION).item(0).getChildNodes().item(0).getNodeValue();
